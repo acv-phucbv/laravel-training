@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Create New Post')
+@section('sheet')
+    <script src="{{ asset('js/ckeditor.js') }}"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+@endsection
 @section('content')
     <a href="/posts" class="btn btn-info">Back</a>
     <div class="col-lg-8 col-lg-offset-2">
@@ -26,4 +30,7 @@
         </form>
         @include('posts.partials.errors')
     </div>
+@endsection
+@section('script')
+
 @endsection

@@ -2,5 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/sb-admin.js": "/js/sb-admin.js",
-    "/js/metisMenu.min.js": "/js/metisMenu.min.js"
+    "/js/metisMenu.min.js": "/js/metisMenu.min.js",
+    "/js/ckeditor.js": "/js/ckeditor.js"
 }

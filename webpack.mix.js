@@ -14,4 +14,5 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
 mix.js('resources/assets/js/sb-admin.js', 'public/js')
 mix.js('resources/assets/js/metisMenu.min.js', 'public/js')
+mix.js('resources/assets/js/ckeditor.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
