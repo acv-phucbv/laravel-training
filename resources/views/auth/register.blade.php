@@ -10,6 +10,32 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
+                        @if (Auth::user())
+                            <div class="form-group">
+                                <label for="role" class="col-md-4 control-label">Role</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" id="role_id" name="role_id">
+                                        @foreach ($role as $r)
+                                            @if ($r->id == 3)
+                                                <option value="{{ $r->id }}" selected>{{ $r->name }}</option>
+                                            @else
+                                                <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('role_id'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('role_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        @else
+                            <input name="role_id" id="role_id" type="text" class="form-control" value="3" style="display: none">
+                        @endif
+
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label for="username" class="col-md-4 control-label">Username</label>
 

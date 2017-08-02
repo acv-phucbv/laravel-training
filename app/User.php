@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'firstname', 'lastname',
+        'role_id', 'username', 'email', 'password', 'firstname', 'lastname',
     ];
 
     /**
@@ -27,8 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function post()
+    public function roles()
     {
-        return $this->hasOne(Models\Post::class);
+        return $this->belongsTo(\App\Models\Roles::class, 'id');
     }
 }

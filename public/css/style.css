@@ -3,14 +3,30 @@
         width: 90%!important;
     }
 }
+
+.navbar-static-top{
+    margin-bottom: 0;
+}
 .main-content{
     margin: 0 15px;
 }
 .sidebar{
-    height: 80vh;
+    padding-top: 20px;
+}
+.navbar-collapse{
+     padding-right: 0px;
+     padding-left: 0px;
 }
 .sidebar .panel-default{
     height: 100%;
+}
+.list-user {width: 100%; border: 1px solid}
+.list-user td {border: 1px solid; padding: 5px 10px; text-align: center}
+.list-user .panel-heading {background: rgba(51, 51, 51, 0.44); color: white;}
+
+.table-user{
+    width: 100%;
+    border: 1px solid;
 }
 footer{
     height: 8.5vh;

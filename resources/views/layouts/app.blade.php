@@ -15,11 +15,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <style>
-        .list-user {width: 100%; border: 1px solid}
-        .list-user td {border: 1px solid; padding: 5px 10px; text-align: center}
-        .list-user .panel-heading {background: rgba(51, 51, 51, 0.44); color: white;}
-    </style>
+
 </head>
 <body>
     <div id="app">
@@ -72,7 +68,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="dashboard">Dashboard</a>
+                                        <a href="/user/{{ Auth::user()->id }}">Dashboard</a>
                                     </li>
                                 </ul>
                             </li>
@@ -84,29 +80,75 @@
 
         <div class="main-content">
             <div class="row">
-                <div class="col-md-3 sidebar">
-                    <div class="panel panel-default">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="home">Home</a></li>
-                            <li><a href="user">Users</a></li>
-                            <li><a href="posts">Posts</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    Dropdown <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                <div class="navbar-default sidebar col-md-2" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/category">List Category</a>
+                                    </li>
+                                    <li>
+                                        <a href="/category/create">Add Category</a>
+                                    </li>
                                 </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-cube fa-fw"></i> Post<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/posts">List Post</a>
+                                    </li>
+                                    <li>
+                                        <a href="/posts/create">Add Post</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/user">List User</a>
+                                    </li>
+                                    <li>
+                                        <a href="/user/create">Add User</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
                             </li>
                         </ul>
                     </div>
+                    <!-- /.sidebar-collapse -->
                 </div>
+                {{--<div class="col-md-3 sidebar">--}}
+                    {{--<div class="panel panel-default">--}}
+                        {{--<ul class="nav nav-pills nav-stacked">--}}
+                            {{--<li class="active"><a href="home">Home</a></li>--}}
+                            {{--<li><a href="user">Users</a></li>--}}
+                            {{--<li><a href="posts">Posts</a></li>--}}
+                            {{--<li class="dropdown">--}}
+                                {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                                    {{--Dropdown <span class="caret"></span>--}}
+                                {{--</a>--}}
+                                {{--<ul class="dropdown-menu">--}}
+                                    {{--<li><a href="#">Action</a></li>--}}
+                                    {{--<li><a href="#">Another action</a></li>--}}
+                                    {{--<li><a href="#">Something else here</a></li>--}}
+                                    {{--<li class="divider"></li>--}}
+                                    {{--<li><a href="#">Separated link</a></li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @yield('content')
                 </div>
             </div>
@@ -120,5 +162,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('js/sb-admin.js') }}"></script>
 </body>
 </html>
