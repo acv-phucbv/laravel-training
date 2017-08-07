@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Models\Post;
-use App\User;
+//use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePost;
+use Image;
+use Storage;
 
 class PostController extends Controller
 {
@@ -45,19 +48,23 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
         $post = new Post();
 
         $user = Auth::user();
 
-        $this->validate($request,
-            [
-                'title'=>'required|unique:posts',
-                'content'=>'required',
-            ]
-        );
-        $post->fill($request->all());
+        $post->title = $request->title;
+        $post->content = $request->body;
+
+        if ($request->hasFile('feature_image')) {
+            $image = $request->file('feature_image');
+            $fileName = time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('images/' . $fileName);
+            Image::make($image)->resize(800,400)->save($location);
+            $post->image = $fileName;
+        }
+
         $post->user_id = $user->id;
         $post->save();
 
@@ -95,17 +102,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePost $request, $id)
     {
         $post = Post::find($id);
-        $this->validate($request,
-            [
-                'title'=>'required',
-                'content'=>'required',
-            ]
-        );
 
-        $post->fill($request->all());
+        $post->title = $request->title;
+        $post->content = $request->body;
+
+        if ($request->hasFile('feature_image')) {
+            $image = $request->file('feature_image');
+            $fileName = time().'.'.$image->getClientOriginalExtension();
+            $location = public_path('images/' . $fileName);
+            Image::make($image)->resize(800,400)->save($location);
+            $oldFileName = $post->image;
+            $post->image = $fileName;
+            Storage::delete($oldFileName);
+        }
+
         $post->save();
 
         session()->flash('message', 'Update Successful');
