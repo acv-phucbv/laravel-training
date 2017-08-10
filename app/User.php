@@ -32,4 +32,37 @@ class User extends Authenticatable
     {
         return $this->belongsTo(\App\Models\Roles::class, 'id');
     }
+
+    public function isAdmin()
+    {
+        if (Auth::guest()) {
+            return false;
+        } else {
+            foreach ($this->roles()->get() as $role)
+            {
+                if ($role->name == 'admin')
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+    }
+
+    public function isAuthor()
+    {
+        foreach ($this->roles()->get() as $role)
+        {
+            if ($role->name == 'author')
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }

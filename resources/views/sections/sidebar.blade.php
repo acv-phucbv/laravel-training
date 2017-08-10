@@ -4,18 +4,30 @@
 
         {{--@endif--}}
         <ul class="nav" id="side-menu">
-            <li>
-                <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-            </li>
+            @if (Auth::guest())
+
+            @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                <li>
+                    <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                </li>
+            @else
+
+            @endif
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Category<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="/category">List Category</a>
                     </li>
-                    <li>
-                        <a href="/category/create">Add Category</a>
-                    </li>
+                    @if (Auth::guest())
+
+                    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                        <li>
+                            <a href="/category/create">Add Category</a>
+                        </li>
+                    @else
+
+                    @endif
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -25,9 +37,15 @@
                     <li>
                         <a href="/posts">List Post</a>
                     </li>
-                    <li>
-                        <a href="/posts/create">Add Post</a>
-                    </li>
+                    @if (Auth::guest())
+
+                    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                        <li>
+                            <a href="/posts/create">Add Post</a>
+                        </li>
+                    @else
+
+                    @endif
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
@@ -37,9 +55,15 @@
                     <li>
                         <a href="/user">List User</a>
                     </li>
-                    <li>
-                        <a href="/user/create">Add User</a>
-                    </li>
+                    @if (Auth::guest())
+
+                    @elseif(Auth::user()->isAdmin())
+                        <li>
+                            <a href="/user/create">Add User</a>
+                        </li>
+                    @else
+
+                    @endif
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

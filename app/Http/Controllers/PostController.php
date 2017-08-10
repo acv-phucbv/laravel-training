@@ -11,6 +11,7 @@ use App\Http\Requests\StorePost;
 use App\Http\Requests\UpdatePost;
 use Image;
 use Storage;
+use Excel;
 
 class PostController extends Controller
 {
@@ -31,6 +32,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
+        $search = \Request::get('search'); //<-- we use global request to get the param of URI
+
+        $posts = Post::where('title','like','%'.$search.'%')
+            ->orderBy('title')
+            ->paginate(20);
 
         return view('posts.index',compact('posts'));
     }
@@ -144,5 +151,17 @@ class PostController extends Controller
 //        session()->flash('message', 'Delete Successful');
 //
 //        return redirect('posts');
+    }
+
+    public function exportListPost()
+    {
+        $posts = Post::all()->toArray();
+
+        Excel::create('items', function($excel) use($posts) {
+            $excel->sheet('ExportFile', function($sheet) use($posts) {
+
+                $sheet->fromArray($posts);
+            });
+        })->download('xls');
     }
 }

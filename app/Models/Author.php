@@ -10,4 +10,12 @@ class Author extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public function isAdmin()
+    {
+        if(\Auth::check() && \Auth::user()->roles === 'admin') {
+            return true;
+        }
+        return false;
+    }
 }

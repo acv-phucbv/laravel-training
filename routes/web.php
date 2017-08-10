@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::get('posts/export', 'PostController@exportListPost')->name('posts.export');
 
 Route::resource('user', 'UserController');
 Route::resource('posts', 'PostController');
