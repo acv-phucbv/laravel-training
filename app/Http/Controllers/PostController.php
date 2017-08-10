@@ -69,8 +69,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $item = Post::find($id);
-        return view('posts.show', compact('item'));
+        $posts = Post::find($id);
+        return view('posts.show', compact('posts'));
     }
 
     /**
@@ -131,8 +131,10 @@ class PostController extends Controller
     {
         $post = Post::findorFail($id);
 
+
         if ( $request->ajax() ) {
             $post->delete( $request->all() );
+            Storage::delete($post->image);
 
             return response(['msg' => 'Product deleted', 'status' => 'success']);
         }

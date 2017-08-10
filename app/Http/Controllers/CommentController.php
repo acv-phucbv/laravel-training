@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\User;
-use App\Models\Roles;
+use App\Models\Comment;
+use Session;
 
-class UserController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-
-        return view('user.index', compact('users'));
+        //
     }
 
     /**
@@ -27,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        //
     }
 
     /**
@@ -36,9 +35,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($postId, Request $request)
     {
-        //
+        $comment = new Comment();
+
+        $comment->name = $request->name;
+        $comment->email = $request->email;
+        $comment->comment = $request->comment;
+        $comment->approve = true;
+        $comment->post_id = $postId;
+
+        $comment->save();
+
+        Session::flash('success', 'Comment was added');
+
+        return back();
     }
 
     /**
@@ -49,8 +60,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('user.show', compact('user'));
+        //
     }
 
     /**

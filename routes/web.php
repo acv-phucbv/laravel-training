@@ -22,3 +22,5 @@ Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 Route::resource('user', 'UserController');
 Route::resource('posts', 'PostController');
+//Route::resource('comment', 'CommentController');
+Route::post('posts/{postId}/comments', 'CommentController@store')->where(['postId' => '[0-9]+'])->name('comment.store');

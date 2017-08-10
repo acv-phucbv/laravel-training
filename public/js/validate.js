@@ -1,5 +1,5 @@
 $(function() {
-    $('#form-login').validate({
+    $('#form-create').validate({
         rules : {
             title : {
                 required : true,
@@ -11,17 +11,17 @@ $(function() {
             }
         },
         messages : {
-            email : {
-                required : "Email không được để trống",
-                email : "Email không đúng định dạng",
+            title : {
+                required : "Tiêu đề không được để trống",
+                minlength : "Tiêu đề phải ít nhất 4 ký tự"
             },
-            password : {
-                required : "Mật khẩu không được để trống",
-                minlength : "Mật khẩu phải có ít nhất 8 ký tự"
+            body : {
+                required : "Nội dung không được để trống",
+                minlength : "Nội dung phải ít nhất 4 ký tự"
             }
         },
         submitHandler : function (form) {
-            //code in here
+            form.submit();
         }
 
     });
