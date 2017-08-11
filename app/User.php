@@ -30,39 +30,18 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo(\App\Models\Roles::class, 'id');
+        return $this->belongsTo(\App\Models\Roles::class, 'role_id')->first();
     }
 
-    public function isAdmin()
-    {
-        if (Auth::guest()) {
-            return false;
-        } else {
-            foreach ($this->roles()->get() as $role)
-            {
-                if ($role->name == 'admin')
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
-    }
-
-    public function isAuthor()
-    {
-        foreach ($this->roles()->get() as $role)
-        {
-            if ($role->name == 'author')
-            {
-                return true;
-            }
-        }
+    public function hasRole($role){
+        $roles = $this->roles();
+        $roleName = explode('|', $roles->role_name);
+        if(in_array($role, $roleName))
+            return true;
 
         return false;
     }
+
 
 
 }

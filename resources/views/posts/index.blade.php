@@ -3,7 +3,7 @@
     @include('posts.partials.message')
     @if (Auth::guest())
 
-    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+    @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
         <a href="user/create" class="btn btn-info">Add New</a>
     @else
 
@@ -35,7 +35,7 @@
                 <th>Time</th>
                 @if (Auth::guest())
 
-                @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
                     <th>Action</th>
                 @else
 
@@ -50,7 +50,7 @@
                     <td>{{ $post->created_at->diffForHumans() }}</td>
                     @if (Auth::guest())
 
-                    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                    @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
                         <td>
                             <a href="posts/{{ $post->id }}/edit">
                                 <button type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>

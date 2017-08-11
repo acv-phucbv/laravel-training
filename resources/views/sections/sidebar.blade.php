@@ -6,7 +6,7 @@
         <ul class="nav" id="side-menu">
             @if (Auth::guest())
 
-            @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+            @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
                 <li>
                     <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
@@ -21,7 +21,7 @@
                     </li>
                     @if (Auth::guest())
 
-                    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                    @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
                         <li>
                             <a href="/category/create">Add Category</a>
                         </li>
@@ -39,7 +39,7 @@
                     </li>
                     @if (Auth::guest())
 
-                    @elseif(Auth::user()->isAdmin() || Auth::user()->isAuthor())
+                    @elseif(Auth::user()->hasRole('admin') || Auth::user()->hasRole('edit'))
                         <li>
                             <a href="/posts/create">Add Post</a>
                         </li>
@@ -57,7 +57,7 @@
                     </li>
                     @if (Auth::guest())
 
-                    @elseif(Auth::user()->isAdmin())
+                    @elseif(Auth::user()->hasRole('admin'))
                         <li>
                             <a href="/user/create">Add User</a>
                         </li>

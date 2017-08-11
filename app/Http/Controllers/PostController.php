@@ -49,6 +49,7 @@ class PostController extends Controller
      */
     public function create()
     {
+//        $this->middleware('checkroles');
         return view('posts.create');
     }
 
